@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../css/bootstrap-4.0.0-dist/css/bootstrap-grid.min.css">
+    <style>
+        /* Styles personnalisés */
+        body {
+            background-color: #ced4da;
+        }
+
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+            height: 100vh;
+        }
+
+        .sidebar .nav-link {
+            color: #fff;
+        }
+
+        .card {
+            background-color: #f8f9fa;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: calc(50vh - 56px); /* 56px est la hauteur de la navbar */
+        }
+
+        .card .card-body {
+            padding: 20px;
+            height: 100%;
+        }
+
+        .card .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .card .icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Navbar sur le côté gauche -->
+        <nav class="col-md-2 d-none d-md-block sidebar" style="background-color: #343a40;">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./user.html">
+                            Gestion user
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Module 2
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Module 3
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Module 4
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Contenu des modules -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" style="background-color: #f8f9fa;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Dashboard</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fas fa-chart-line icon"></i>
+                            <h5 class="card-title">Module 1</h5>
+                            Contenu du module 1
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fas fa-users icon"></i>
+                            <h5 class="card-title">Module 2</h5>
+                            Contenu du module 2
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fas fa-tasks icon"></i>
+                            <h5 class="card-title">Module 3</h5>
+                            Contenu du module 3
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fas fa-bell icon"></i>
+                            <h5 class="card-title">Module 4</h5>
+                            Contenu du module 4
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
