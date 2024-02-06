@@ -25,7 +25,6 @@
                             <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe">
                         </div>
                         <button type="submit" class="btn btn-primary">Se connecter</button>
-                        <p></p>
                     </form>
                 </div>
             </div>
@@ -47,8 +46,11 @@
             // Await the response from the asynchronous function
             const token = await getLogin(username, password);
 
-            // Use response data
-            sessionStorage.setItem('token', token);
+            if (token!=null) {
+                sessionStorage.setItem('token', token);
+                window.location.replace("/home.html");
+            }
+
         } catch (e) {
             // Handle errors
             alert('Error: ' + e.message);

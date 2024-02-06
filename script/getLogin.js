@@ -1,6 +1,4 @@
 import {ip} from '../conf.js';
-// import axios from "axios";
-// const axios = axios
 
 export async function getLogin(username, password) {
     let response;
@@ -20,11 +18,9 @@ export async function getLogin(username, password) {
 
         // Extrait les données de la réponse
         const responseData = await response.json();
-        alert('Requête effectuée avec succès !');
         return responseData.token;
     } catch (error) {
         console.error(error);
-        alert('Une erreur s\'est produite lors de la requête.');
         return null;
     }
 }
