@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau Bootstrap avec données JSON</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Liste des clients</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Nom d'utilisateur</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+            </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Bootstrap JS and jQuery (optional, for some features like dropdowns, modals, etc.) -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Your custom JavaScript -->
+<!--<script type="module">-->
+<!--    import {getAllClient} from "../../script/getAllClient.js";-->
+
+<!--    document.addEventListener("DOMContentLoaded", function () {-->
+<!--        // Supposons que vous ayez récupéré des données JSON et que vous les avez stockées dans un tableau JavaScript-->
+<!--        const data = getAllClient();-->
+
+<!--        console.log(data)-->
+
+<!--        // Récupérer l'élément tbody du tableau-->
+<!--        var tbody = document.getElementById("table-body");-->
+
+<!--        // Boucler à travers les propriétés de l'objet JavaScript et les ajouter au tableau-->
+<!--        for (var key in data) {-->
+<!--            if (dataArray.hasOwnProperty(key)) {-->
+<!--                var row = document.createElement("tr");-->
+<!--                row.innerHTML = "<td>" + item.id_user + "</td><td>" + item.last_name + "</td><td>" + item.first_name + "</td><td>" + item.username + "</td><td>" + item.email + "</td><td>" + item.tel + "</td>";-->
+
+<!--                tbody.appendChild(row);-->
+<!--            }-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+
+<script type="module">
+    import { getAllClient } from "../../script/getAllClient.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Supposons que vous ayez récupéré des données JSON et que vous les avez stockées dans un tableau JavaScript
+        getAllClient().then(function(data) {
+            console.log(data);
+
+            // Récupérer l'élément tbody du tableau
+            var tbody = document.getElementById("table-body");
+
+            // Boucler à travers les propriétés de l'objet JavaScript et les ajouter au tableau
+            for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    var item = data[key];
+                    var row = document.createElement("tr");
+                    row.innerHTML = "<td>" + item.id_user + "</td><td>" + item.last_name + "</td><td>" + item.first_name + "</td><td>" + item.username + "</td><td>" + item.email + "</td><td>" + item.tel + "</td>";
+
+                    tbody.appendChild(row);
+                }
+            }
+        }).catch(function(error) {
+            console.error("Une erreur s'est produite lors de la récupération des données :", error);
+        });
+    });
+</script>
+
+</body>
+</html>

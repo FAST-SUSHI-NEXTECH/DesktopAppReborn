@@ -9,6 +9,7 @@
         /* Styles personnalisés */
         body {
             background-color: #ced4da;
+            margin: 0;
         }
 
         .sidebar {
@@ -22,7 +23,8 @@
         }
 
         .card {
-            background-color: #f8f9fa;
+            margin: 5px;
+            background-color: #dbdcdd;
             border: none;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -42,6 +44,10 @@
         .card .icon {
             font-size: 3rem;
             margin-bottom: 10px;
+        }
+
+        #client {
+                cursor: pointer; /* Changement du curseur pour pointer */
         }
     </style>
 </head>
@@ -84,10 +90,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" id="client">
                             <i class="fas fa-chart-line icon"></i>
-                            <h5 class="card-title">Module 1</h5>
-                            Contenu du module 1
+                            <h5 class="card-title">Liste de clients</h5>
+                            <p>Nombre de client inscrit:</p>
+                            <h2 id="nbr_client"></h2>
                         </div>
                     </div>
                 </div>
@@ -96,7 +103,7 @@
                         <div class="card-body">
                             <i class="fas fa-users icon"></i>
                             <h5 class="card-title">Module 2</h5>
-                            Contenu du module 2
+                            <p>Contenu du module 1</p>
                         </div>
                     </div>
                 </div>
@@ -105,7 +112,7 @@
                         <div class="card-body">
                             <i class="fas fa-tasks icon"></i>
                             <h5 class="card-title">Module 3</h5>
-                            Contenu du module 3
+                            <p>Contenu du module 1</p>
                         </div>
                     </div>
                 </div>
@@ -114,7 +121,7 @@
                         <div class="card-body">
                             <i class="fas fa-bell icon"></i>
                             <h5 class="card-title">Module 4</h5>
-                            Contenu du module 4
+                            <p>Contenu du module 1</p>
                         </div>
                     </div>
                 </div>
@@ -123,8 +130,31 @@
     </div>
 </div>
 
+<script type="module">
+    import {getNbrClient} from "../../script/getNbrClient.js";
+
+    async function updateNbrClient() {
+        const nbr_client = await getNbrClient();
+        document.getElementById("nbr_client").textContent = nbr_client;
+    }
+
+    updateNbrClient();
+</script>
+
+<script>
+    // Sélection du div par son ID
+    var cardBody = document.getElementById("client");
+
+    // Ajout d'un gestionnaire d'événements de clic
+    cardBody.addEventListener("click", function() {
+        // Redirection vers une autre page
+        window.location.href = "./user.html";
+    });
+</script>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 </body>
 </html>
