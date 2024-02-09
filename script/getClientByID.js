@@ -1,13 +1,14 @@
 import {ip} from '../conf.js';
 
-export async function getAllClient() {
+export async function getClientByID(id_user) {
     try {
-        const response = await fetch(ip + '/user/client', {
-            method: 'GET',
+        const response = await fetch(ip + '/user/client/id', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': "Bearer " + sessionStorage.getItem('token')
             },
+            body: JSON.stringify({id_user})
         });
 
         if (!response.ok) {
@@ -17,7 +18,6 @@ export async function getAllClient() {
         const data = await response.json();
         return (data);
     } catch (error) {
-        alert("catch getAllClient");
         alert(error);
         console.log(error);
         return null; // Renvoie null en cas d'erreur
