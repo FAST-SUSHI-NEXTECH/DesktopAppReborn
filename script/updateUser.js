@@ -1,6 +1,6 @@
 import {ip} from '../conf.js';
 
-export async function updateUser(user_id, last_name, first_name, username, password, email, tel) {
+export async function updateUser(user_id, last_name, first_name, username, email, tel) {
     try {
         const response = await fetch(ip + '/user/update', {
             method: 'PUT',
@@ -8,7 +8,7 @@ export async function updateUser(user_id, last_name, first_name, username, passw
                 'Content-Type': 'application/json',
                 'Authorization': "Bearer " + sessionStorage.getItem('token')
             },
-            body: JSON.stringify({user_id, last_name, first_name, username, password, email, tel})
+            body: JSON.stringify({user_id, last_name, first_name, username, email, tel})
         });
 
         const statusCode = response.status; // Récupérer le code HTTP

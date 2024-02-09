@@ -1,6 +1,6 @@
 import {ip} from '../conf.js';
 
-export async function deleteUser(username) {
+export async function deleteUser(id_user) {
     try {
         const response = await fetch(ip + '/user/delete', {
             method: 'DELETE',

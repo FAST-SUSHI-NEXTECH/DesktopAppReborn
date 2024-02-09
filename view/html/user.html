@@ -68,8 +68,6 @@
       var email = data[0][0].email;
       var tel = data[0][0].tel;
 
-      sessionStorage.setItem('pwd', data[0][0].password);
-
       // Récupérer l'élément h2
       var titreFormulaire = document.getElementById("titre");
 
@@ -96,7 +94,6 @@
   const urlParams = new URLSearchParams(queryString);
 
   const id = urlParams.get('id');
-  const pwd = sessionStorage.getItem('pwd')
 
   document.getElementById('updateUser').addEventListener('submit', async function (event) {
     event.preventDefault(); // Prevent page reload
@@ -107,13 +104,35 @@
     const email = document.getElementById('email').value;
     const tel = document.getElementById('tel').value;
 
-    const response = updateUser(id, last_name, first_name, username, pwd, email, tel);
+    const response = updateUser(id, last_name, first_name, username, email, tel);
 
-    console.log(response)
-
-    // window.location.replace("./users.html");
+    alert("Changement effectué")
   });
 
+</script>
+
+<script type="module">
+  // Sélection du bouton "Supprimer l'utilisateur"
+  import {deleteUser} from "../../script/deleteUser.js";
+
+  // Récupérer les paramètres de l'URL
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  // Récupérer la valeur de l'ID
+  const id = urlParams.get('id');
+
+  const deleteButton = document.querySelector('.btn-danger');
+
+  // Ajout d'un gestionnaire d'événements au clic sur le bouton
+  deleteButton.addEventListener('click', function() {
+    // Code à exécuter lorsque le bouton est cliqué
+    if (confirm("Voulez-vous vraiment supprimer cet utilisateur ?")) {
+      const response = deleteUser(id);
+      console.log(response);
+      alert(response)
+    }
+  });
 </script>
 
 </body>
