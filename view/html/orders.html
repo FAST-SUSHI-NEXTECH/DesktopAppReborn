@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau Bootstrap avec données JSON</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/users.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Liste des commandes</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID de commande</th>
+                <th>ID de client</th>
+                <th>ID de préparateur</th>
+                <th>Stade de la commande</th>
+                <th>Date de la commande</th>
+            </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+            <button type="button" class="btn btn-secondary"><a href="./home.html" class="text-dark">Retour</a></button>
+        </table>
+    </div>
+</div>
+
+<!-- Bootstrap JS and jQuery (optional, for some features like dropdowns, modals, etc.) -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script type="module">
+    import {getAllOrder} from "../../script/getAllOrder.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Supposons que vous ayez récupéré des données JSON et que vous les avez stockées dans un tableau JavaScript
+        getAllOrder().then(function(data) {
+
+            // Récupérer l'élément tbody du tableau
+            const tbody = document.getElementById("table-body");
+
+            // Boucler à travers les propriétés de l'objet JavaScript et les ajouter au tableau
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    const item = data[key];
+                    const row = document.createElement("tr");
+                    row.innerHTML = "<td><a href='order.html?id=" + item.id_order + "'>" + item.id_order + "</a></td><td><a href='user.html?id=" + item.id_client + "'>" + item.id_client + "</td><td>" + item.id_picker + "</td><td>" + item.order_state + "</td><td>" + item.date + "</td>";
+
+                    tbody.appendChild(row);
+                }
+            }
+        }).catch(function(error) {
+            console.error("Une erreur s'est produite lors de la récupération des données :", error);
+        });
+    });
+</script>
+
+</body>
+</html>
