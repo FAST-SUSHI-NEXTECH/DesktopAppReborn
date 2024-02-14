@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Création d'un user</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <h2 id="titre">Création d'un user</h2>
+  <form id="createUser" typeof="Form">
+    <div class="form-group">
+      <label for="last_name">last_name:</label>
+      <input type="text" class="form-control" id="last_name">
+    </div>
+    <div class="form-group">
+      <label for="first_name">first_name:</label>
+      <input class="form-control" id="first_name"></input>
+    </div>
+    <div class="form-group">
+      <label for="username">username:</label>
+      <input type="text" class="form-control" id="username">
+    </div>
+    <div class="form-group">
+      <label for="password">password:</label>
+      <input type="password" class="form-control" id="password">
+    </div>
+    <div class="form-group">
+      <label for="email">email:</label>
+      <input type="text" class="form-control" id="email">
+    </div>
+    <div class="form-group">
+    <label for="tel">tel:</label>
+    <input type="text" class="form-control" id="tel">
+  </div>
+    <button type="submit" class="btn btn-primary">Crée le client</button>
+    <button type="button" class="btn btn-secondary"><a href="./home.html" class="text-dark">Retour</a></button>
+  </form>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script type="module">
+  import {createUser} from "../../script/createUser.js";
+
+  document.getElementById('createUser').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent page reload
+
+    const last_name = document.getElementById('last_name').value;
+    const first_name = document.getElementById('first_name').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const tel = document.getElementById('tel').value;
+
+    const response = createUser(last_name, first_name, username, password, email, tel);
+
+    alert("User crée")
+
+  });
+
+</script>
+
+</body>
+</html>
