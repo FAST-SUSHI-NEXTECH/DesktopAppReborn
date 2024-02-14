@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire Prérempli avec JS</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <h2 id="titre">Gestion du produit n°</h2>
+  <form id="updateUser" typeof="Form">
+    <div class="form-group">
+      <label for="type_product">type_product :</label>
+      <input class="form-control" id="type_product"></input>
+    </div>
+    <div class="form-group">
+      <label for="product_name">product_name :</label>
+      <input type="text" class="form-control" id="product_name">
+    </div>
+    <div class="form-group">
+      <label for="description">description :</label>
+      <input type="text" class="form-control" id="description">
+    </div>
+    <div class="form-group">
+      <label for="price">price :</label>
+      <input type="text" class="form-control" id="price">
+    </div>
+    <div class="form-group">
+      <label for="quantity">quantity :</label>
+      <input type="text" class="form-control" id="quantity">
+    </div>
+    <div class="form-group">
+      <label for="image">image :</label>
+      <input type="file" class="form-control" id="image">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+    <button type="button" class="btn btn-danger">Mettre à jour l'image du produit</button>
+    <button type="button" class="btn btn-danger">Supprimer l'utilisateur</button>
+    <button type="button" class="btn btn-secondary"><a href="./home.html" class="text-dark">Retour</a></button>
+  </form>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script type="module">
+
+  // Récupérer les paramètres de l'URL
+  import {getProductByID} from "../../script/getProductByID.js";
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  // Récupérer la valeur de l'ID
+  const id = urlParams.get('id');
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Supposons que vous ayez récupéré des données JSON et que vous les avez stockées dans un tableau JavaScript
+    getProductByID(id).then(function(PromiseResult) {
+      // Créer un tableau contenant les données
+      const data = [PromiseResult];
+
+      // Récupérer l'élément tbody du tableau
+      const tbody = document.getElementById("table-body");
+
+      var id_product = data[0][0].id_product
+      var type_product = data[0][0].type_product;
+      var product_name = data[0][0].product_name;
+      var description = data[0][0].description;
+      var price = data[0][0].price;
+      var quantity = data[0][0].quantity;
+
+      // Récupérer l'élément h2
+      var titreFormulaire = document.getElementById("titre");
+
+      // Ajouter le texte de la variable à l'élément h2
+      titreFormulaire.innerText += " " + id_product;
+
+      // Remplissage des champs du formulaire avec les valeurs par défaut
+      document.getElementById("type_product").value = type_product;
+      document.getElementById("product_name").value = product_name;
+      document.getElementById("description").value = description;
+      document.getElementById("price").value = price;
+      document.getElementById("quantity").value = quantity;
+    }).catch(function(error) {
+      console.error("Une erreur s'est produite lors de la récupération des données :", error);
+    });
+  });
+
+</script>
+<script type="module">
+  import {updateUser} from "../../script/updateUser.js";
+
+  // Récupérer les paramètres de l'URL
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  const id = urlParams.get('id');
+
+  document.getElementById('updateUser').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent page reload
+
+    const last_name = document.getElementById('last_name').value;
+    const first_name = document.getElementById('first_name').value;
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const tel = document.getElementById('tel').value;
+
+    const response = updateUser(id, last_name, first_name, username, email, tel);
+
+    alert("Changement effectué")
+  });
+
+</script>
+
+<script type="module">
+  // Sélection du bouton "Supprimer l'utilisateur"
+  import {deleteUser} from "../../script/deleteUser.js";
+
+  // Récupérer les paramètres de l'URL
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  // Récupérer la valeur de l'ID
+  const id = urlParams.get('id');
+
+  const deleteButton = document.querySelector('.btn-danger');
+
+  // Ajout d'un gestionnaire d'événements au clic sur le bouton
+  deleteButton.addEventListener('click', function() {
+    // Code à exécuter lorsque le bouton est cliqué
+    if (confirm("Voulez-vous vraiment supprimer cet utilisateur ?")) {
+      const response = deleteUser(id);
+      console.log(response);
+      alert(response)
+    }
+  });
+</script>
+
+</body>
+</html>
