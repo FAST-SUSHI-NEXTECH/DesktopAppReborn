@@ -33,6 +33,7 @@
   </div>
     <button type="submit" class="btn btn-primary">Envoyer</button>
     <button type="button" class="btn btn-danger">Supprimer l'utilisateur</button>
+    <button type="button" class="btn btn-success">Promouvoir l'utilisateur</button>
     <button type="button" class="btn btn-secondary"><a href="./home.html" class="text-dark">Retour</a></button>
   </form>
 </div>
@@ -129,6 +130,32 @@
     // Code à exécuter lorsque le bouton est cliqué
     if (confirm("Voulez-vous vraiment supprimer cet utilisateur ?")) {
       const response = deleteUser(id);
+    }
+  });
+</script>
+
+<script type="module">
+  import {upgradeUser} from "../../script/upgradeUser.js";
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  // Récupérer la valeur de l'ID
+  const id = urlParams.get('id');
+
+  const upgradeButton = document.querySelector('.btn-success');
+
+  // Ajout d'un gestionnaire d'événements au clic sur le bouton
+  upgradeButton.addEventListener('click', function() {
+    // Code à exécuter lorsque le bouton est cliqué
+    if (confirm("Voulez-vous vraiment supprimer cet utilisateur ?")) {
+      const response = upgradeUser(id);
+      if (response===200) {
+        alert("User promu");
+        window.location.href = "./users.html"
+      } else {
+        alert("Erreur")
+      }
     }
   });
 </script>
