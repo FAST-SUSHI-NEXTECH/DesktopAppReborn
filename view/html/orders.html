@@ -20,6 +20,7 @@
                 <th>ID de préparateur</th>
                 <th>Stade de la commande</th>
                 <th>Date de la commande</th>
+                <th>Prix de la commande</th>
                 <th>Lien vers les produits commandés</th>
             </tr>
             </thead>
@@ -39,10 +40,11 @@
 
 <script type="module">
     import {getAllOrder} from "../../script/getAllOrder.js";
+    import {getPrice} from "../../script/getPrice.js";
 
     document.addEventListener("DOMContentLoaded", function () {
         // Supposons que vous ayez récupéré des données JSON et que vous les avez stockées dans un tableau JavaScript
-        getAllOrder().then(function(data) {
+        getAllOrder().then(async function (data) {
 
             // Récupérer l'élément tbody du tableau
             const tbody = document.getElementById("table-body");
@@ -52,7 +54,16 @@
                 if (data.hasOwnProperty(key)) {
                     const item = data[key];
                     const row = document.createElement("tr");
-                    row.innerHTML = "<td><a href='order.html?id=" + item.id_order + "'>" + item.id_order + "</a></td><td><a href='user.html?id=" + item.id_client + "'>" + item.id_client + "</td><td>" + item.id_picker + "</td><td>" + item.order_state + "</td><td>" + item.date + "</td><td><a href='ordercontent.html?id=" + item.id_order + "'>Accès au produit commandés</a></td>";
+                    console.log("ID= " + item.id_order + " type: " + typeof (item.id_order))
+                    let price = await getPrice(item.id_order);
+                    // let price = 0;
+                    // getPrice(item.id_order).then(function(PromiseResult) {
+                    //     // Créer un tableau contenant les données
+                    //     price = [PromiseResult][0][0].TOTAL_ORDER;
+                    //     console.log([PromiseResult][0][0].TOTAL_ORDER);
+                    // });
+
+                    row.innerHTML = "<td><a href='order.html?id=" + item.id_order + "'>" + item.id_order + "</a></td><td><a href='user.html?id=" + item.id_client + "'>" + item.id_client + "</td><td>" + item.id_picker + "</td><td>" + item.order_state + "</td><td>" + item.date + "</td><td>" + price[0].TOTAL_ORDER + "</td><td><a href='ordercontent.html?id=" + item.id_order + "'>Accès au produit commandés</a></td>";
 
                     tbody.appendChild(row);
                 }
