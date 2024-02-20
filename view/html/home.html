@@ -74,7 +74,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            Module 2
+                            Add PromoCode
                         </a>
                     </li>
                     <li class="nav-item">
@@ -84,7 +84,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            Module 4
+                            Disconnect
                         </a>
                     </li>
                 </ul>
@@ -130,10 +130,10 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" id="staffs">
                             <i class="fas fa-bell icon"></i>
-                            <h5 class="card-title">Module 4</h5>
-                            <p>Contenu du module 1</p>
+                            <h5 class="card-title">Gestion des préparateurs</h5>
+                            <p>Nombre de préparateur</p>
                         </div>
                     </div>
                 </div>
@@ -200,6 +200,18 @@
         window.location.href = "./products.html";
     });
 </script>
+
+<script>
+    // Sélection du div par son ID
+    var cardBody = document.getElementById("staffs");
+
+    // Ajout d'un gestionnaire d'événements de clic
+    cardBody.addEventListener("click", function() {
+        // Redirection vers une autre page
+        window.location.href = "./staffs.html";
+    });
+</script>8
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

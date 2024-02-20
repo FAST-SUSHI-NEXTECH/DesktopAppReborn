@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau Bootstrap avec données JSON</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/users.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Liste des clients</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Nom d'utilisateur</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Rôle</th>
+            </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+            <button type="button" class="btn btn-secondary"><a href="./userCreate.html" class="text-dark">Crée un nouveau client</a></button>
+            <button type="button" class="btn btn-secondary"><a href="./home.html" class="text-dark">Retour</a></button>
+        </table>
+    </div>
+</div>
+
+<!-- Bootstrap JS and jQuery (optional, for some features like dropdowns, modals, etc.) -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script type="module">
+
+    import {getAllStaff} from "../../script/getAllStaff.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Supposons que vous ayez récupéré des données JSON et que vous les avez stockées dans un tableau JavaScript
+        getAllStaff().then(function(data) {
+
+            // Récupérer l'élément tbody du tableau
+            const tbody = document.getElementById("table-body");
+
+            // Boucler à travers les propriétés de l'objet JavaScript et les ajouter au tableau
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    const item = data[key];
+                    const row = document.createElement("tr");
+                    let perm = null;
+                    if (item.permission === 2) {
+                        perm = "Préparateur"
+                    } else {
+                        perm = "Administrateur"
+                    }
+                    row.innerHTML = "<td><a href='user.html?id=" + item.id_user + "'>" + item.id_user + "</a></td><td>" + item.last_name + "</td><td>" + item.first_name + "</td><td>" + item.username + "</td><td>" + item.email + "</td><td>" + item.tel + "</td><td>" + perm + "</td>";
+
+                    tbody.appendChild(row);
+                }
+            }
+        }).catch(function(error) {
+            console.error("Une erreur s'est produite lors de la récupération des données :", error);
+        });
+    });
+</script>
+
+</body>
+</html>
