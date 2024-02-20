@@ -31,14 +31,8 @@
       <label for="quantity">quantity :</label>
       <input type="text" class="form-control" id="quantity">
     </div>
-    <div class="form-group">
-      <label for="image">image :</label>
-      <input type="file" class="form-control" id="image">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Envoyer</button>
-    <button type="button" class="btn btn-danger">Mettre à jour l'image du produit</button>
-    <button type="button" class="btn btn-danger">Supprimer l'utilisateur</button>
+    <button type="submit" class="btn btn-primary">Modifier</button>
+    <button type="button" class="btn btn-danger">Supprimer le produit</button>
     <button type="button" class="btn btn-secondary"><a href="./home.html" class="text-dark">Retour</a></button>
   </form>
 </div>
@@ -91,10 +85,12 @@
   });
 
 </script>
+
 <script type="module">
-  import {updateUser} from "../../script/updateUser.js";
 
   // Récupérer les paramètres de l'URL
+  import {updateProduct} from "../../script/updateProduct.js";
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
@@ -103,13 +99,14 @@
   document.getElementById('updateUser').addEventListener('submit', async function (event) {
     event.preventDefault(); // Prevent page reload
 
-    const last_name = document.getElementById('last_name').value;
-    const first_name = document.getElementById('first_name').value;
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const tel = document.getElementById('tel').value;
+    const id_product = document.getElementById('id_product').value;
+    const type_product = document.getElementById('type_product').value;
+    const product_name = document.getElementById('product_name').value;
+    const description = document.getElementById('description').value;
+    const price = document.getElementById('price').value;
+    const quantity = document.getElementById('quantity').value;
 
-    const response = updateUser(id, last_name, first_name, username, email, tel);
+    const response = updateProduct(id_product, type_product, product_name, description, price, quantity);
 
     alert("Changement effectué")
   });
@@ -117,10 +114,9 @@
 </script>
 
 <script type="module">
-  // Sélection du bouton "Supprimer l'utilisateur"
-  import {deleteUser} from "../../script/deleteUser.js";
 
-  // Récupérer les paramètres de l'URL
+  import {deleteProduct} from "../../script/deleteProduct.js";
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
@@ -132,12 +128,12 @@
   // Ajout d'un gestionnaire d'événements au clic sur le bouton
   deleteButton.addEventListener('click', function() {
     // Code à exécuter lorsque le bouton est cliqué
-    if (confirm("Voulez-vous vraiment supprimer cet utilisateur ?")) {
-      const response = deleteUser(id);
-      console.log(response);
-      alert(response)
+    if (confirm("Voulez-vous vraiment supprimer ce produit ?")) {
+      const response = deleteProduct(id);
+      alert("Produit supprimé");
     }
   });
+
 </script>
 
 </body>

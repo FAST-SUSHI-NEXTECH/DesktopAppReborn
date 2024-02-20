@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Création d'un produit</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <h2 id="titre">Création d'un produit</h2>
+  <form id="createProduct" typeof="Form">
+    <div class="form-group">
+      <label for="type_product">Choisissez le type du produit :</label>
+      <select id="type_product" name="type_product">
+        <option value="base">base</option>
+        <option value="ingredient">ingredient</option>
+        <option value="dessert">dessert</option>
+        <option value="appetizer">appetizer</option>
+        <option value="plate">plate</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="product_name">product_name:</label>
+      <input class="form-control" id="product_name"></input>
+    </div>
+    <div class="form-group">
+      <label for="description">description:</label>
+      <input type="text" class="form-control" id="description">
+    </div>
+    <div class="form-group">
+      <label for="price">price:</label>
+      <input type="text" class="form-control" id="price">
+    </div>
+    <div class="form-group">
+      <label for="quantity">quantity:</label>
+      <input type="text" class="form-control" id="quantity">
+    </div>
+    <button type="submit" class="btn btn-primary">Crée le client</button>
+    <button type="button" class="btn btn-secondary"><a href="./home.html" class="text-dark">Retour</a></button>
+  </form>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script type="module">
+  import {createProduct} from "../../script/createProduct.js";
+
+  document.getElementById('createProduct').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent page reload
+
+    const type_product = document.getElementById('type_product').value;
+    const product_name = document.getElementById('product_name').value;
+    const description = document.getElementById('description').value;
+    const price = document.getElementById('price').value;
+    const quantity = document.getElementById('quantity').value;
+
+    const response = createProduct(type_product, product_name, description, price, quantity);
+
+    alert("Produit crée")
+
+  });
+
+</script>
+
+</body>
+</html>
