@@ -2,7 +2,7 @@ import {ip} from '../conf.js';
 
 export async function updateProduct(id_product, type_product, product_name, description, price, quantity) {
     try {
-        const response = await fetch(ip + '/user/update', {
+        const response = await fetch(ip + '/product/update', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

@@ -12,8 +12,14 @@
   <h2 id="titre">Gestion du produit n°</h2>
   <form id="updateUser" typeof="Form">
     <div class="form-group">
-      <label for="type_product">type_product :</label>
-      <input class="form-control" id="type_product"></input>
+      <label for="type_product">Choisissez le type du produit :</label>
+      <select id="type_product" name="type_product">
+        <option value="base">base</option>
+        <option value="ingredient">ingredient</option>
+        <option value="dessert">dessert</option>
+        <option value="appetizer">appetizer</option>
+        <option value="plate">plate</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="product_name">product_name :</label>
@@ -99,14 +105,13 @@
   document.getElementById('updateUser').addEventListener('submit', async function (event) {
     event.preventDefault(); // Prevent page reload
 
-    const id_product = document.getElementById('id_product').value;
     const type_product = document.getElementById('type_product').value;
     const product_name = document.getElementById('product_name').value;
     const description = document.getElementById('description').value;
     const price = document.getElementById('price').value;
     const quantity = document.getElementById('quantity').value;
 
-    const response = updateProduct(id_product, type_product, product_name, description, price, quantity);
+    const response = updateProduct(id, type_product, product_name, description, price, quantity);
 
     alert("Changement effectué")
   });
