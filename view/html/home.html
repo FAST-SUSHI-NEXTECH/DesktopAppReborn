@@ -4,66 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../css/bootstrap-4.0.0-dist/css/bootstrap-grid.min.css">
-    <style>
-        /* Styles personnalisés */
-        body {
-            background-color: #ced4da;
-            margin: 0;
-        }
-
-        .sidebar {
-            background-color: #343a40;
-            color: #fff;
-            height: 100vh;
-        }
-
-        .sidebar .nav-link {
-            color: #fff;
-        }
-
-        .card {
-            margin: 5px;
-            background-color: #dbdcdd;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            height: calc(50vh - 56px); /* 56px est la hauteur de la navbar */
-        }
-
-        .card .card-body {
-            padding: 20px;
-            height: 100%;
-        }
-
-        .card .card-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .card .icon {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-
-        #client {
-            cursor: pointer; /* Changement du curseur pour pointer */
-        }
-
-        #products {
-            cursor: pointer; /* Changement du curseur pour pointer */
-        }
-
-        #orders {
-            cursor: pointer; /* Changement du curseur pour pointer */
-        }
-    </style>
+    <link href="../css/output.css" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">
     <div class="row">
         <!-- Navbar sur le côté gauche -->
-        <nav class="col-md-2 d-none d-md-block sidebar" style="background-color: #343a40;">
+        <nav class="col-md-2 d-none d-md-block sidebar" style="">
             <div class="sidebar-sticky">
                 <img src="../../logo_blanc.png" alt="Logo">
                 <ul class="nav flex-column">
@@ -253,11 +200,6 @@
         window.location.href = "./staffs.html";
     });
 </script>
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </body>
 </html>
