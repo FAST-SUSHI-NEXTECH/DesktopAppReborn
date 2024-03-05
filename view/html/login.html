@@ -35,6 +35,7 @@
 
 <script type="module">
     import { getLogin } from '../../script/getLogin.js';
+    import { IsJWTadmin } from '../../script/isJWTadmin.js'
 
     document.getElementById('loginForm').addEventListener('submit', async function (event) {
         event.preventDefault(); // Prevent page reload
@@ -47,8 +48,13 @@
             const token = await getLogin(username, password);
 
             if (token!=null) {
-                sessionStorage.setItem('token', token);
-                window.location.replace("./home.html");
+                if (IsJWTadmin(token)) {
+                    sessionStorage.setItem('token', token);
+                    console.log("check")
+                    // window.location.replace("./home.html");
+                } else {
+                    alert("Permission non autorisé")
+                }
             }
 
         } catch (e) {
