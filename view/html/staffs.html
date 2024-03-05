@@ -22,6 +22,7 @@
                 <th>Email</th>
                 <th>Téléphone</th>
                 <th>Rôle</th>
+                <th>Information</th>
             </tr>
             </thead>
             <tbody id="table-body">
@@ -41,10 +42,11 @@
 <script type="module">
 
     import {getAllStaff} from "../../script/getAllStaff.js";
+    import {getPickerIDByUsername} from "../../script/getPickerIDByUsername.js";
 
     document.addEventListener("DOMContentLoaded", function () {
         // Supposons que vous ayez récupéré des données JSON et que vous les avez stockées dans un tableau JavaScript
-        getAllStaff().then(function(data) {
+        getAllStaff().then(async function (data) {
 
             // Récupérer l'élément tbody du tableau
             const tbody = document.getElementById("table-body");
@@ -57,10 +59,13 @@
                     let perm = null;
                     if (item.permission === 2) {
                         perm = "Préparateur"
+                        let id_prepa = await getPickerIDByUsername(item.username);
+                        row.innerHTML = "<td><a href='user.html?id=" + item.id_user + "'>" + item.id_user + "</a></td><td>" + item.last_name + "</td><td>" + item.first_name + "</td><td>" + item.username + "</td><td>" + item.email + "</td><td>" + item.tel + "</td><td>" + perm + "</td><td>ID préparateur: " + id_prepa + "</td>";
                     } else {
                         perm = "Administrateur"
+                        row.innerHTML = "<td><a href='user.html?id=" + item.id_user + "'>" + item.id_user + "</a></td><td>" + item.last_name + "</td><td>" + item.first_name + "</td><td>" + item.username + "</td><td>" + item.email + "</td><td>" + item.tel + "</td><td>" + perm + "</td><td>None</td>";
+
                     }
-                    row.innerHTML = "<td><a href='user.html?id=" + item.id_user + "'>" + item.id_user + "</a></td><td>" + item.last_name + "</td><td>" + item.first_name + "</td><td>" + item.username + "</td><td>" + item.email + "</td><td>" + item.tel + "</td><td>" + perm + "</td>";
 
                     tbody.appendChild(row);
                 }
