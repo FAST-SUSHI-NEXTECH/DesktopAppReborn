@@ -13,6 +13,5 @@
     "electron": "^28.2.1"
   },
   "dependencies": {
-    "jose": "^5.2.1"
   }
 }

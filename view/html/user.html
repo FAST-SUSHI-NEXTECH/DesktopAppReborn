@@ -28,9 +28,9 @@
       <input type="text" class="form-control" id="email">
     </div>
     <div class="form-group">
-    <label for="tel">tel:</label>
-    <input type="text" class="form-control" id="tel">
-  </div>
+      <label for="tel">tel:</label>
+      <input type="text" class="form-control" id="tel">
+    </div>
     <button type="submit" class="btn btn-primary">Envoyer</button>
     <button type="button" class="btn btn-danger">Supprimer l'utilisateur</button>
     <button type="button" class="btn btn-success">Promouvoir l'utilisateur</button>
@@ -42,10 +42,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <script type="module">
-  import {getClientByID} from "../../script/getClientByID.js";
+  import {getUserByID} from "../../script/getUserByID.js";
 
   // Récupérer les paramètres de l'URL
-  const queryString = window.location.search;
+  let queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
   // Récupérer la valeur de l'ID
@@ -53,14 +53,12 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     // Supposons que vous ayez récupéré des données JSON et que vous les avez stockées dans un tableau JavaScript
-    getClientByID(id).then(function(PromiseResult) {
+    getUserByID(id).then(function(PromiseResult) {
       // Créer un tableau contenant les données
       const data = [PromiseResult];
 
       // Récupérer l'élément tbody du tableau
       const tbody = document.getElementById("table-body");
-
-      console.log(data[0][0]);
 
       var id_user = data[0][0].id_user
       var last_name = data[0][0].last_name;
@@ -68,6 +66,8 @@
       var username = data[0][0].username;
       var email = data[0][0].email;
       var tel = data[0][0].tel;
+
+      localStorage.setItem('perm', data[0][0].permission);
 
       // Récupérer l'élément h2
       var titreFormulaire = document.getElementById("titre");
@@ -137,6 +137,7 @@
 <script type="module">
   import {upgradeUser} from "../../script/upgradeUser.js";
 
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
@@ -145,17 +146,23 @@
 
   const upgradeButton = document.querySelector('.btn-success');
 
+  const perm = localStorage.getItem('perm');
+
   // Ajout d'un gestionnaire d'événements au clic sur le bouton
   upgradeButton.addEventListener('click', function() {
     // Code à exécuter lorsque le bouton est cliqué
-    if (confirm("Voulez-vous vraiment supprimer cet utilisateur ?")) {
-      const response = upgradeUser(id);
-      if (response===200) {
-        alert("User promu");
-        window.location.href = "./users.html"
-      } else {
-        alert("Erreur")
+    if (perm==1) {
+      if (confirm("Voulez-vous vraiment promouvoir cet utilisateur ?")) {
+        const response = upgradeUser(id);
+        if (response === 200) {
+          alert("User promu");
+          window.location.href = "./users.html";
+        } else {
+          alert("Erreur");
+        }
       }
+    } else {
+      alert("Seulement les clients peuvent être promu au rang de préparateur");
     }
   });
 </script>

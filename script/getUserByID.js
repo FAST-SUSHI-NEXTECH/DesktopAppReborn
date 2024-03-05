@@ -1,8 +1,8 @@
 import {ip} from '../conf.js';
 
-export async function getClientByID(id_user) {
+export async function getUserByID(id_user) {
     try {
-        const response = await fetch(ip + '/user/client/id', {
+        const response = await fetch(ip + '/user/id', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
