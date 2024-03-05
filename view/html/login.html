@@ -4,27 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="stylesheet" href="../css/bootstrap-4.0.0-dist/css/bootstrap-grid.min.css">
+    <link href="../css/output.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Connexion</h3>
+<div class="w-full bg-gradient-to-bl from-neutral-900 to-slate-900 bg-cover h-screen">
+    <div class="w-full max-w-xl mx-auto">
+        <div class="w-full py-20">
+            <div class="bg-gray-700 rounded-lg max-w-sm mx-auto text-white">
+                <div class="my-4 py-4">
+                    <h3 class="font-bold text-center text-2xl">Fast Sushi <span class="bg-gradient-to-r from-cyan-500 to-sky-600 px-2 rounded-lg font-light">admin</span></h3>
                 </div>
                 <div class="card-body">
                     <form id="loginForm" typeof="Form">
-                        <div class="form-group">
-                            <label for="username">Nom d'utilisateur</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Entrez votre nom d'utilisateur">
+                        <div class="w-full max-w-80 mx-auto mb-3">
+                            <div class="grid grid-cols-1">
+                                <label class="font-bold" for="username">Nom d'utilisateur</label>
+                                <input type="text" class="w-full rounded-sm p-2 text-black focus:border-0" id="username" name="username" placeholder="Entrez votre nom d'utilisateur">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe">
+                        <div class="w-full max-w-80 mx-auto mb-4">
+                            <div class="grid grid-cols-1">
+                                <label class="font-bold" for="password">Mot de passe</label>
+                                <input type="password" class="w-full rounded-sm p-2 text-black" id="password" name="password" placeholder="Entrez votre mot de passe">
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Se connecter</button>
+                        <div class="w-full max-w-44 mx-auto">
+                            <button type="submit" class="my-4 mb-6 p-2 mx-auto w-full max-w-44 bg-gradient-to-r from-cyan-500 to-sky-600 font-bold rounded-md hover:to-sky-700">Se connecter</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -51,7 +57,7 @@
                 if (IsJWTadmin(token)) {
                     sessionStorage.setItem('token', token);
                     console.log("check")
-                    // window.location.replace("./home.html");
+                    window.location.replace("./home.html");
                 } else {
                     alert("Permission non autorisé")
                 }
