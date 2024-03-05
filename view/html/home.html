@@ -121,10 +121,10 @@
                         <div class="card-body" id="orders">
                             <i class="fas fa-tasks icon"></i>
                             <h5 class="card-title">Gestion des commandes</h5>
-                            <p>Nombre de commande en attende de validation :</p>
-                            <p>Nombre de commande en cours :</p>
-                            <p>Nombre de commande fini: </p>
                             <p id="nbrcommande">Nombre de commande total: </p>
+                            <p id="totalOrderAttentePEC">Chiffre d'affaire en attente de prise en charge : </p>
+                            <p id="totalOrderAttenteP">Chiffre d'affaire en attente de préparation : </p>
+                            <p id="totalOrderValide">Chiffre d'affaire validé : </p>
                         </div>
                     </div>
                 </div>
@@ -154,7 +154,6 @@
 </script>
 
 <script type="module">
-
     import {getOrderCount} from "../../script/getOrderCount.js";
 
     const nbrOrder = await getOrderCount();
@@ -164,8 +163,51 @@
 
     // Ajouter le texte de la variable à l'élément h2
     nbrcommande.innerText += " " + nbrOrder;
+</script>
 
+<script type="module">
+    import {getAmountByState} from "../../script/getAmountByState.js";
 
+    getAmountByState(1).then(async function (data) {
+
+        // Récupérer l'élément tbody du tableau
+        const totalOrderAttentePEC = document.getElementById("totalOrderAttentePEC");
+
+        totalOrderAttentePEC.innerText += " " + data[0].TOTAL_ORDER;
+
+    }).catch(function(error) {
+        console.error("Une erreur s'est produite lors de la récupération des données :", error);
+    });
+</script>
+
+<script type="module">
+    import {getAmountByState} from "../../script/getAmountByState.js";
+
+    getAmountByState(2).then(async function (data) {
+
+        // Récupérer l'élément tbody du tableau
+        const totalOrderAttenteP = document.getElementById("totalOrderAttenteP");
+
+        totalOrderAttenteP.innerText += " " + data[0].TOTAL_ORDER;
+
+    }).catch(function(error) {
+        console.error("Une erreur s'est produite lors de la récupération des données :", error);
+    });
+</script>
+
+<script type="module">
+    import {getAmountByState} from "../../script/getAmountByState.js";
+
+    getAmountByState(3).then(async function (data) {
+
+        // Récupérer l'élément tbody du tableau
+        const totalOrderValide = document.getElementById("totalOrderValide");
+
+        totalOrderValide.innerText += " " + data[0].TOTAL_ORDER;
+
+    }).catch(function(error) {
+        console.error("Une erreur s'est produite lors de la récupération des données :", error);
+    });
 </script>
 
 <script>
@@ -210,7 +252,7 @@
         // Redirection vers une autre page
         window.location.href = "./staffs.html";
     });
-</script>8
+</script>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
